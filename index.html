@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>London Property Lab</title>
+    <link rel="icon" href="images/favicon-96x96.png" type="image/png"> 
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KCCGGQXLQH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KCCGGQXLQH');
+</script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    if (location.hostname !== "londonpropertylab.com") {
+        console.warn("Google Analytics blocked on unauthorized domain:", location.hostname);
+        window.gtag = function() {}; // Prevent sending data
+    } else {
+        gtag('config', 'G-KCCGGQXLQH');
+    }
+</script>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          document.querySelectorAll("a").forEach(link => {
+              link.addEventListener("click", function() {
+                  gtag('event', 'click', {
+                      'event_category': 'link',
+                      'event_label': this.href
+                  });
+              });
+          });
+      });
+  </script>
+
+
+
+    <style>
+        .rotation-reminder {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 999999;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .rotation-reminder.show {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        .reminder-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 1rem;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .smartphone-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            animation: rotate 1.5s ease infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            75% { transform: rotate(90deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .reminder-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .reminder-text {
+            color: #666;
+            line-height: 1.5;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+        <div class="rotation-reminder">
+            <div class="reminder-content">
+                <svg class="smartphone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                    <line x1="12" y1="18" x2="12" y2="18"></line>
+                </svg>
+                <div class="reminder-title">Please Rotate Your Device</div>
+                <div class="reminder-text">
+                    This website is optimised for portrait mode. Please rotate your device vertically for the best experience.
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const reminder = document.querySelector('.rotation-reminder');
+                
+                // Function to check if the device is mobile
+                function isMobileDevice() {
+                    return (typeof window.orientation !== "undefined") 
+                        || (navigator.userAgent.indexOf('IEMobile') !== -1)
+                        || (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+                }
+    
+                function checkOrientation() {
+                    // Only show reminder if it's a mobile device AND in landscape
+                    if (isMobileDevice() && window.innerWidth > window.innerHeight) {
+                        reminder.classList.add('show');
+                    } else {
+                        reminder.classList.remove('show');
+                    }
+                }
+    
+                // Check on page load
+                checkOrientation();
+    
+                // Check on resize and orientation change
+                window.addEventListener('resize', checkOrientation);
+                window.addEventListener('orientationchange', checkOrientation);
+            });
+        </script>
+</body>
+</html>   
+
+
+
+<header id="navbar">
+    <div class="logo">
+      <a href="/">
+        <img id="logo" src="images/pre-scroll-final.svg" alt="London Property Lab Logo">
+      </a>
+    </div>
+    <nav>
+        <div class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <!-- Move the nav icon inside the active nav-links -->
+                <div class="nav-icon"></div>
+                
+                <a href="#approach">Inside the Lab</a>
+                <a href="#news-insights">Research & News</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+                <a href="https://londonpropertylab.substack.com/" class="newsletter" target="_blank" rel="noopener noreferrer">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <section class="hero">
+        <video id="hero-video" autoplay muted loop playsinline class="hero-video">
+            <source src="videos/hero.mp4" type="video/mp4">
+            <source src="videos/hero.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let video = document.getElementById("hero-video");
+        
+        // Wait for metadata to be loaded before setting currentTime
+        video.addEventListener('loadedmetadata', function() {
+            video.currentTime = 5;
+        });
+
+        // Handle autoplay and loop
+        video.addEventListener('canplay', function() {
+            video.play().catch(function(error) {
+                console.log("Video play failed:", error);
+            });
+        });
+
+        // If video ends, reset to 5 seconds and play again
+        video.addEventListener('ended', function() {
+            video.currentTime = 5;
+            video.play();
+        });
+    });
+</script>
+
+
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Unlock a data-driven angle on London's real estate market</h1>
+            <p>Get free, exclusive data-powered insights straight to your inbox</p>
+            <div class="substack-cta">
+              <a href="https://londonpropertylab.substack.com" class="subscribe-btn" target="_blank">
+                Subscribe on Substack
+              </a>
+          </div>
+        </div>
+
+
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-dot"></div>
+            <div class="scroll-line"></div>
+        </div>
+    </section> 
+
+
+    <section id="approach">
+        <div class="approach-header">
+          <h2>London Property Lab provides independent, data-driven insights on London's dynamic property market. We transform complex data into clear, actionable intelligence, empowering first-time buyers, homeowners, tenants, and investors to make informed decisions.</h2>
+          <h2>Founded by a seasoned investment researcher passionate about harnessing data, our mission is to use advanced analytics to reveal the hidden insights that traditional providers in the property market often overlook.</h2>
+        </div>
+          <div class="approach-boxes">
+        <div class="approach-item">
+            <img src="images/1step.jpg" alt="Approach Step 1">
+            <h3>1. Idea Generation & Data Gathering</h3>
+            <p>The research process begins with an ideation phase that identifies emerging trends and critical market questions. This phase shapes a targeted data gathering strategy, leveraging multiple trusted sources to compile comprehensive insights.
+            </p>
+        </div>
+        <div class="approach-item">
+            <img src="images/2step.jpg" alt="Approach Step 2">
+            <h3>2. Data Cleaning & Structuring</h3>
+            <p>After collection, data undergoes rigorous cleaning and validation to ensure reliability. Feature engineering and exploratory analysis are then applied to structure the data effectively for further evaluation.
+            </p>
+        </div>
+        <div class="approach-item">
+            <img src="images/3step.jpg" alt="Approach Step 3">
+            <h3>3. Statistical Exploration & Analysis</h3>
+            <p>A range of statistical analyses is implemented to uncover trends and extract meaningful insights from the data.
+            </p>
+        </div>
+
+        <div class="approach-item">
+            <img src="images/4step.jpg" alt="Approach Step 4">
+            <h3>4. Targeted Strategic Insights</h3>
+            <p>Finally, relevant findings are translated into clear, targeted recommendations that empower data-driven decision-making and strategic planning.</p>
+        </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+    <section id="news-insights">
+      <div class="container">
+          <h2>Research & News</h2>
+          <div class="news-grid">
+
+              <div class="news-card">
+                  <a href="https://medium.com/your-post" target="_blank">
+                      <div class="news-image" style="background-image: url('images/news1.png');"></div>
+                      <div class="news-content">
+                          <p class="news-date">2025</p>
+                          <p class="news-category">Research</p>
+                          <h3>Coming soon!</h3>
+                      </div>
+                  </a>
+              </div>
+  
+
+              <div class="news-card custom-bg">
+                  <a href="https://substack.com/your-post" target="_blank">
+                      <div class="news-image" style="background-image: url('images/news6.png');"></div>
+                      <div class="news-content">
+                          <p class="news-date">2025</p>
+                          <p class="news-category">Research</p>
+                          <h3>Coming soon!</h3>
+                      </div>
+                  </a>
+              </div>
+  
+
+              <div class="news-card">
+                  <a href="https://medium.com/another-post" target="_blank">
+                      <div class="news-image" style="background-image: url('images/news3.png');"></div>
+                      <div class="news-content">
+                          <p class="news-date">2025</p>
+                          <p class="news-category">Research</p>
+                          <h3>Coming soon!</h3>
+                      </div>
+                  </a>
+              </div>
+
+              <div class="news-card custom-bg">
+                <a href="https://medium.com/another-post" target="_blank">
+                    <div class="news-image" style="background-image: url('images/news5.png');"></div>
+                    <div class="news-content">
+                        <p class="news-date">2025</p>
+                        <p class="news-category">Research</p>
+                        <h3>Coming soon!</h3>
+                    </div>
+                </a>
+            </div>
+          </div>
+      </div>
+  </section>
+
+      <section id="faq">
+        <div class="faq-wrapper">
+            <!-- Left Side: Title and Contact Info -->
+            <div class="faq-header">
+                <h2>You have questions? <br> <span>We have answers</span></h2>
+            </div>
+     
+
+        <div class="faq-container">
+          <div class="faq-item">
+              <button class="faq-question">
+                What does London Property Lab do? <span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                  <p>London Property Lab delivers in-depth analysis of London's real estate market, powered by data. It aggregates and interprets property listings, sales trends, demographics, and more to provide actionable insights for homeowners, buyers, landlords, and investors. Whether you're locally or internationally based, our data-driven analysis ensures you have the insights you need to make informed decisions.</p>
+                </div>    
+            </div>
+
+          <div class="faq-item">
+              <button class="faq-question">
+                Who benefits from your service?<span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                  <p>We empower a diverse clientele—from first-time buyers and homeowners to tenants and seasoned investors. First-time buyers gain clarity in a complex market, uncovering undervalued assets and emerging opportunities, while homeowners are equipped to optimise their property value. Tenants benefit from targeted insights that help them identify ideal locations based on key lifestyle factors. Additionally, our custom analyses are tailored to meet the specialized needs of investors, estate agents, and retailers.</p>
+              </div>
+          </div>
+
+          <div class="faq-item">
+              <button class="faq-question">
+                How can I access your service?<span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                <p>Access free market insights and updates on our core social media channels—Substack, LinkedIn, and Instagram. For customised analysis, detailed reports, and strategic advice, please contact us directly through our website. You can submit your request via email at contact@londonpropertylab.com or use the contact form provided. We will work with you to develop a tailored solution and provide a quote.</p>                                
+              </div>
+          </div>
+
+          <div class="faq-item">
+              <button class="faq-question">
+                What kind of insights can I find on your social media channels? <span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                <p>
+                    Connect with us for the latest London property market insights across multiple platforms (links at the bottom of the page):
+                  </p>
+                  
+                  <ul>
+                        <li><strong>LinkedIn</strong>: Regular bite-sized research and news</li>
+                        <li><strong>Substack</strong>: In-depth articles and market commentary</li>
+                        <li><strong>X (formerly Twitter)</strong>: Brief insights and news updates</li>
+                        <li><strong>Instagram</strong>: Visuals and quick tips on London trends</li>
+                        <li><strong>Reddit</strong>: Community discussions and interactive insights</li>
+                  </ul>
+              </div>
+          </div>
+
+
+          <div class="faq-item">
+              <button class="faq-question">
+                What areas of London do you focus on in your analysis?<span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                <p>We specialise in data-driven analysis of London's property market, covering everything from central boroughs like Westminster to outer areas such as Croydon. Our analysis is highly granular, enabling exploration of trends at the postcode, ward, or borough level. While our primary focus is on London, we may consider other regions on a case-by-case basis. Contact us to discuss your specific needs.</p>
+              </div>
+          </div>
+
+          <div class="faq-item">
+              <button class="faq-question">
+                How do you generate insights? <span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                <p>Insights are generated using reliable data sourced from trusted providers like HM Land Registry and the Office for National Statistics. Data quality is a top priority—we invest significant resources in cleaning, validating, and ensuring accuracy. This rigorous approach ensures actionable insights you can trust, and we are committed to transparency by disclosing any potential data limitations.</p>
+              </div>
+          </div>
+
+          <div class="faq-item">
+              <button class="faq-question">
+                How much does your service cost?<span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                  <p>Pricing is tailored to each project based on your needs and the complexity of the analysis. Contact us with your requirements for a customised quote.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="skyline-divider"></div>
+</section>
+    
+
+
+<section id="contact">
+  <div class="contact-wrapper">
+
+      <div class="contact-header">
+          <h2>Have a question that is not answered, feedback, or an enquiry?</h2>
+          <p>You can either contact us at 
+              <a href="mailto:contact@londonpropertylab.com">contact@londonpropertylab.com</a> 
+              or complete the contact form.
+          </p>
+      </div>
+
+
+      <div class="contact-container">
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/xldglogr" method="POST" onsubmit="return false;">
+            
+              <div class="form-group">
+                  <input type="text" name="name" placeholder="Your name" required 
+                         autocomplete="name" autocapitalize="words" aria-label="Enter your name">
+              </div>
+              <div class="form-group">
+                  <input type="email" name="email" placeholder="Your email" required 
+                         autocomplete="email" aria-label="Enter your email">
+              </div>
+              <div class="form-group">
+                  <input type="tel" name="contact" placeholder="Your contact number" required 
+                         autocomplete="tel" aria-label="Enter your contact number">
+              </div>
+              <div class="form-group">
+                  <textarea name="message" placeholder="Your message" required 
+                            aria-label="Enter your message"></textarea>
+              </div>
+              <button type="submit" class="contact-button" aria-label="Send your enquiry">Send enquiry</button>
+              <!-- Success Message (Hidden by Default) -->
+              <p id="success-message" style="display: none; color: green; margin-top: 10px;">Message sent successfully. We'll get back to you soon.</p>
+          </form>
+
+          <script>
+            document.getElementById("contact-form").addEventListener("submit", function(event) {
+                event.preventDefault(); // Stop Formspree from redirecting
+            
+                const form = this;
+                const successMessage = document.getElementById("success-message");
+            
+                fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        successMessage.style.display = "block"; // Show success message
+                        successMessage.style.opacity = "1"; // Ensure visibility
+                        form.reset(); // Clear form fields
+            
+                        // Auto-hide success message after 5 seconds (optional)
+                        setTimeout(() => {
+                            successMessage.style.opacity = "0"; // Fade out
+                            setTimeout(() => {
+                                successMessage.style.display = "none"; // Hide
+                            }, 1000);
+                        }, 5000);
+                    } else {
+                        alert("❌ Error: Could not send message. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    alert("❌ Network error: Please check your internet connection.");
+                });
+            });
+            </script>
+      </div>
+  </div>
+</section>
+
+<section class="legal">
+  <div class="legal-content">
+      <p>Copyright &copy London Property Lab&reg; 2025 - All rights reserved - Website designed with &hearts; by HA10 Ltd.</p>
+      <div class="legal-links">
+          <a href="cookie-policy.html"target="_blank" rel="noopener noreferrer">Cookie Policy</a>
+          <a href="terms.html" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+          <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          <a href="disclaimer.html" target="_blank" rel="noopener noreferrer">Disclaimer</a>
+      </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+      <div class="social-links">
+          <a href="https://www.linkedin.com/company/london-property-lab" target="_blank">
+              <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://londonpropertylab.substack.com/" target="_blank">
+              <img src="images/substack-icon.svg" alt="Substack Icon" width="24" height="20">
+          </a>
+          <a href="https://x.com/londonproplab" target="_blank">
+              <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com/londonpropertylab/" target="_blank">
+              <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="https://www.reddit.com/r/LondonPropertyLab/" target="_blank">
+              <i class="fa-brands fa-reddit-alien"></i>
+          </a>
+      </div>
+  </div>
+</footer>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Select all in-page anchor links (href starting with "#")
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault(); // Prevent the default jump
+          
+          // Get the target element's ID by removing the '#' from the href
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            // Scroll smoothly to the target element
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
+
+
+  </script>
+
+<div id="cookie-popup" class="cookie-popup">
+  <p>We use cookies on our website to see how you interact with it. By accepting, you agree to our use of such cookies.</p>
+  <button id="accept-cookies">Accept</button>
+  <button id="decline-cookies">Decline</button>
+</div>
+
+</body>
+</html>
