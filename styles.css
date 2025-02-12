@@ -1,0 +1,2784 @@
+/* CSS Variables */
+:root {
+  /* Colors */
+  --white: #ffffff;
+  --black: #111111;
+  --dark-blue: #000080;
+  --nav-bg: rgba(9, 9, 44, 0.97);
+
+  /* Spacing */
+  --nav-link-padding: 1rem;
+  --nav-link-gap: 4.5rem;
+
+  /* Transitions */
+  --transition-speed: 0.3s;
+
+  /* Z-indices */
+  --z-header: 100;
+  --z-hamburger: 200;
+  --z-menu: 99;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Bold.ttf") format("truetype");
+  font-weight: 700; /* Alternatively, you can use "bold" but numeric is more explicit */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Medium.ttf") format("truetype");
+  font-weight: 500; /* Alternatively, you can use "bold" but numeric is more explicit */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Regular.ttf") format("truetype");
+  font-weight: 400; /* Alternatively, you can use "bold" but numeric is more explicit */
+  font-display: swap;
+}
+
+/* General Styles */
+body {
+  font-family: "Satoshi", sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #111;
+  position: relative;
+  padding-bottom: 0px; /* Adjust this value if you have a tall footer */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* Navbar */
+header {
+  position: fixed;
+  height: 6rem;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  background: transparent;
+  color: var(--white);
+  transition: background var(--transition-speed) ease-in-out,
+    color var(--transition-speed) ease-in-out;
+  z-index: var(--z-header);
+  box-sizing: border-box;
+}
+
+header.scrolled {
+  background: var(--white);
+  color: var(--black);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Navigation Styles */
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  width: auto;
+  height: 100%;
+  margin: 0;
+  gap: var(--nav-link-gap);
+}
+
+/* Base Navigation Styles */
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding-right: 2rem; /* Add padding to prevent newsletter button from touching the edge */
+  gap: 2rem; /* Explicit gap between navigation items */
+}
+
+/* Common Link Styles */
+.nav-links a {
+  font-family: "Satoshi", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 0.75rem 1rem; /* Standardized padding for all links */
+  color: inherit;
+  position: relative;
+  transition: color var(--transition-speed) ease-in-out,
+    background-color var(--transition-speed) ease-in-out;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Underline Effect */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  width: 0%;
+  height: 2px;
+  background: var(--white);
+  transition: width var(--transition-speed) ease-in-out;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Newsletter Button */
+.nav-links .newsletter {
+  border: 2px solid var(--white);
+  border-radius: 4px;
+  margin-left: 1rem; /* Reduced margin to prevent overflow */
+  padding: 0.5rem 1.25rem; /* Adjusted padding for button appearance */
+}
+
+.nav-links .newsletter:hover {
+  background-color: var(--dark-blue);
+  border-color: var(--dark-blue);
+  color: var(--white);
+}
+
+.nav-links .newsletter::after {
+  content: none;
+}
+
+/* Full screen underlying colour after scroll*/
+header.scrolled .nav-links a::after {
+  background: var(--black);
+}
+
+header.scrolled .nav-links .newsletter {
+  border-color: var(--black);
+  color: var(--black);
+}
+
+header.scrolled .nav-links .newsletter:hover {
+  background-color: var(--dark-blue);
+  border-color: var(--dark-blue);
+  color: var(--white);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  position: relative;
+  z-index: var(--z-hamburger);
+  margin: 0;
+  align-self: center;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--white);
+  margin: 5px 0;
+  transition: background-color var(--transition-speed) ease-in-out,
+    transform var(--transition-speed) ease-in-out;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: flex-end;
+}
+
+.logo img,
+.logo img.scrolled {
+  height: 50px;
+  width: auto;
+  display: block;
+  margin: 0;
+  transition: opacity var(--transition-speed) ease-in-out;
+}
+
+/* Hamburger lines color change when scrolled */
+header.scrolled .hamburger span {
+  background-color: var(--black); /* Changed to var(--black) which is #111 */
+}
+
+/* Improved X animation */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  background-color: var(--white);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  background-color: var(--white);
+}
+
+/* Hamburger CROSS COLOUR WHEN SCROLLED */
+header.scrolled .hamburger.active span:nth-child(1),
+header.scrolled .hamburger.active span:nth-child(3) {
+  background-color: #ffffff; /* Changed to var(--black) which is #111 */
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  overflow: hidden;
+  padding-top: 0rem; /* Ensures content is always below navbar */
+}
+
+.hero-content {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  transform: translateY(-30%);
+  width: 100%; /* Limit width for larger screens */
+  max-width: 100%; /* Add max-width to ensure text doesn't stretch too wide */
+  text-align: left;
+  color: white;
+  line-height: 1.5;
+  padding-right: 20px; /* Ensure some space on the right side */
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.hero-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.hero-text {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* H1 Styling */
+
+.hero-content h1 {
+  width: 60%;
+  max-width: 700px;
+  font-family: "Satoshi", sans-serif;
+  font-weight: 700;
+  line-height: 1.4;
+  font-size: clamp(1.5rem, 2.2vw, 2.5rem);
+  opacity: 0;
+  visibility: hidden; /* Prevents initial flicker */
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1s;
+}
+
+/* Paragraph appears after H1 */
+.hero-content p {
+  font-family: "Satoshi", sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1.5s;
+}
+
+.substack-cta {
+  text-align: left;
+  margin-top: 1.5rem; /* Adds space below the paragraph */
+}
+
+.subscribe-btn {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  background: #000080; /* London Property Lab blue */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+  width: auto; /* Ensures flexibility on larger screens */
+  max-width: 250px; /* Prevents it from becoming too wide */
+  opacity: 0; /* Initially hidden */
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 2s;
+}
+
+.subscribe-btn:hover {
+  background: #002bff; /* Brighter blue on hover */
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 5vh; /* Ensure it stays visible */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  font-family: "Satoshi", sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1rem); /* Ensures proper scaling */
+  font-weight: bold;
+  letter-spacing: 2px;
+  opacity: 0;
+  cursor: pointer;
+  animation: fadeIn 1.5s ease-in-out forwards;
+  width: 100%;
+}
+
+/* Adjusts the size of the dot */
+.scroll-dot {
+  width: clamp(10px, 1.2vw, 12px); /* Dynamically adjust size */
+  height: clamp(10px, 1.2vw, 12px);
+  background-color: white;
+  border-radius: 50%;
+  display: block;
+  margin: 10px auto;
+  animation: bounceDot 1.5s infinite ease-in-out;
+}
+
+/* Adjusts the line size */
+.scroll-line {
+  width: clamp(8px, 2vw, 20px); /* Ensure better scaling */
+  height: 2px;
+  background: var(--white);
+  margin: 5px auto;
+  animation: loading 1.5s infinite alternate ease-in-out;
+}
+
+/* Animations */
+@keyframes bounceDot {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes loading {
+  0% {
+    width: 10px;
+    opacity: 0.5;
+  }
+  100% {
+    width: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.nav-links.active {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0; /* Changed to left for left alignment */
+  background: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  height: 100vh;
+  text-align: left;
+  z-index: 99;
+  align-items: flex-start; /* Align items to the start (left) */
+  justify-content: flex-start; /* Ensure content starts from the top */
+  padding: 80px 20px 20px;
+}
+.nav-links.active > div {
+  padding-left: 20px; /* Left padding for the container */
+  width: 100%; /* Full width to ensure alignment */
+}
+/* Change the underline behavior when scrolled */
+header.scrolled .nav-links.active a::after {
+  background: var(--white);
+}
+header.scrolled .nav-links.active a:hover::after {
+  width: 100%;
+  background: var(--white);
+}
+header.scrolled .nav-links.active a {
+  color: #ffffff;
+}
+header.scrolled .nav-links.active a.newsletter {
+  border-color: #ffffff;
+  color: var(--white);
+}
+header.scrolled .nav-links.active a.newsletter:hover {
+  border-color: #000080;
+}
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  background-color: white;
+  z-index: 102;
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  background-color: white;
+  z-index: 102;
+}
+
+header.scrolled .hamburger.active span {
+  background-color: #111;
+}
+
+/* Mobile Navigation */
+.nav-links.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 120vh;
+  padding: 120px 40px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--nav-bg);
+  z-index: var(--z-menu);
+}
+
+.nav-links.active a {
+  display: block;
+  padding: 15px 25px;
+  margin: 10px 0;
+  width: fit-content;
+  text-align: left;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.nav-links.active a.newsletter {
+  min-width: 120px; /* Minimum width for newsletter */
+}
+
+/* Approach Section */
+#approach {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  align-items: flex-start;
+  justify-content: flex-start; /* default, can be adjusted */
+  padding: 1rem 3rem;
+  background: transparent;
+  text-align: left;
+  scroll-margin-top: 95px;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/*THis contains H2*/
+.approach-header {
+  background: transparent;
+  position: sticky;
+  top: 5rem;
+  height: fit-content;
+  padding: 2rem;
+  padding-left: 3rem;
+
+  max-width: 100%; /* Ensure the box doesn't exceed the container width */
+  margin: 0; /* Center the box horizontally */
+  flex: 1;
+  z-index: 1;
+}
+
+.approach-header h2 {
+  font-family: "Satoshi", sans-serif;
+  position: relative;
+  flex-direction: column;
+  font-size: clamp(1.2rem, 1.3vw, 2rem);
+  font-weight: 700;
+  color: darkblue;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  text-align: left;
+  align-items: center;
+}
+
+.approach-header h2:nth-of-type(2) {
+  color: var(--black);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+}
+
+.approach-header h2 .word {
+  display: inline-block;
+  opacity: 0;
+}
+
+.approach-header h2 .word.animate {
+  animation: wordSlide 0.5s forwards;
+}
+
+@keyframes wordSlide {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Ensure the container fills more of the screen */
+.approach-boxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Allows flexible item widths */
+  gap: 1.5rem; /* Reduce gap between items for better fit */
+  max-width: 48%; /* Increase max-width to take more space */
+  margin: 0 auto;
+  flex: 1;
+  padding: 2rem;
+  box-sizing: inherit;
+}
+
+/* Ensure all boxes have consistent alignment */
+.approach-item {
+  background: transparent;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+}
+
+/* Ensure images fit better */
+.approach-item img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+}
+
+.approach-item img:hover {
+  opacity: 1;
+  transform: scale(1.05); /* Return to full opacity on hover */
+}
+
+.approach-item h3 {
+  font-family: "Satoshi", sans-serif;
+  font-weight: 700;
+  color: var(--dark-blue);
+  font-size: clamp(1rem, 1.2rem, 1.7rem);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; /* Reduced bottom margin */
+  width: 100%;
+  text-align: left; /* Ensures full width */
+}
+
+/* Specific rule for paragraph text inside boxes */
+.approach-item p {
+  font-family: "Satoshi", sans-serif;
+  display: flex;
+  font-weight: 500;
+  margin-top: 0;
+  color: var(--black);
+  font-size: clamp(1rem, 1.1rem, 1.5rem);
+  line-height: 1.6;
+  text-align: left; /* Explicitly setting text alignment */
+}
+
+/* Grid Layout */
+
+#news-insights {
+  display: inline;
+  background-color: #f0f0f0; /* Change this to your preferred background color */
+  scroll-margin-top: 50px;
+  padding: 4rem 0rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 90%;
+  margin: auto;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.container h2 {
+  font-family: "Satoshi", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark-blue);
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 0rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.news-grid {
+  display: flex;
+  display: grid;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  justify-content: center; /* Centers all items */
+  flex-wrap: nowrap; /* Prevents wrapping */
+}
+
+/* News Card */
+.news-card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.news-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Image Section */
+.news-image {
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  background-size: cover;
+  background-position: center;
+  filter: contrast(110%);
+}
+
+/* Content Section */
+.news-content {
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  min-height: 140px; /* Ensures equal height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-date {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.news-category {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Custom Background for Article 2 */
+.custom-bg .news-content {
+  background-color: #000080; /* Change this color as needed */
+}
+
+/* FAQ Section */
+#faq {
+  background: var(--white);
+  padding: 0rem 5rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  scroll-margin-top: 100px;
+}
+
+/* Wrapper for Two Columns */
+.faq-wrapper {
+  display: flex;
+  top: 180px;
+  height: fit-content;
+  align-items: flex-start; /* Ensures header and first FAQ box are aligned */
+  padding: 0rem 0rem;
+  max-width: 1200px;
+  width: 100%;
+  gap: 3rem; /* Space between left and right */
+  margin-top: 7rem;
+  margin-bottom: 10rem;
+}
+
+/* Left Side: Sticky Title */
+.faq-header {
+  text-align: left;
+  flex: 1;
+  position: sticky; /* Keeps it fixed at the top */
+  top: 120px; /* Adjusted for better spacing from navbar */
+  height: fit-content;
+  max-width: 400px;
+  margin: 0; /* Remove all margins */
+  padding-top: 5rem; /* Adjust to prevent hitting navbar */
+}
+
+.faq-header h2 {
+  font-family: "Satoshi", sans-serif;
+  font-size: clamp(1.8rem, 2.2rem, 2.5rem);
+  font-weight: 700;
+  color: var(--dark-blue);
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  line-height: 1.6; /* Adjust line height if needed */
+  margin-bottom: 50;
+}
+
+.faq-header h2 span {
+  color: #555; /* Dark grey */
+  margin-top: 50px;
+  font-weight: 500; /* Optional: makes it slightly lighter */
+}
+
+/* Right Side: FAQ Container */
+.faq-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0; /* Remove all margins */
+  padding-top: 5rem; /* Adjust to prevent hitting navbar */
+  font-size: 1.3rem;
+}
+
+/* FAQ Items */
+.faq-item {
+  background: rgb(0, 0, 128, 0.1);
+  border: 0px solid var(--dark-blue);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* FAQ Question */
+.faq-question {
+  width: 100%;
+  background: #f0f0f0;
+  color: #000080;
+  font-family: "Satoshi", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
+  text-align: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+/* FAQ Answer */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1rem;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+/* Expand when active */
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding: 1rem;
+}
+
+.faq-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  flex-shrink: 0; /* Prevents icon from shrinking */
+}
+
+/* Ensure the FAQ icon remains centered */
+.faq-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  position: relative;
+}
+
+/* Horizontal (-) and Vertical (|) Bars */
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  background-color: #000080; /* Adjust color if needed */
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+/* Add transition property to .faq-icon::before */
+.faq-icon::before {
+  width: 0.2em;
+  height: 1.2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Added transition */
+}
+
+/* Horizontal bar (-) */
+.faq-icon::after {
+  width: 1.2em;
+  height: 0.2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Update the vertical bar rotation animation for .faq-icon::before */
+.faq-item.active .faq-icon::before {
+  transform: translate(-50%, -50%) rotate(90deg); /* Changed to maintain axis position */
+  opacity: 0;
+}
+
+/* Optional: Scale effect for smoother interaction */
+.faq-item.active .faq-icon {
+  transform: scale(1);
+}
+
+.faq-section {
+  position: relative; /* Ensures child elements are positioned relative to this */
+  padding-bottom: 120px; /* Adds space for the skyline */
+}
+
+.skyline-divider {
+  background-image: url("images/Skyline.png"); /* Use your actual file */
+  background-repeat: repeat-x; /* Repeat horizontally */
+  background-size: contain; /* Keep proportions */
+  background-position: center bottom; /* Stick to bottom */
+  position: absolute; /* Position relative to .faq-section */
+  bottom: 0; /* Stick to the bottom of FAQ */
+  left: 0;
+  height: 120px; /* Adjust height */
+  width: 100%; /* Full width */
+  opacity: 0.4; /* Lighten the image */
+}
+
+/* Contact Section Fix */
+#contact {
+  background: var(--white);
+  max-width: 100%;
+  padding: 5rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Two-column layout */
+.contact-wrapper {
+  display: flex;
+  flex-direction: row; /* Ensure horizontal alignment */
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5rem 5rem;
+  max-width: 1200px;
+  width: 100%;
+  gap: 3rem; /* Same gap as FAQ */
+}
+
+/* Left Side: Contact Heading */
+.contact-header {
+  flex: 1; /* Equal width */
+  max-width: 50%; /* Ensure it doesn't grow too much */
+  text-align: left;
+}
+
+.contact-header h2 {
+  font-family: "Satoshi", sans-serif;
+  font-size: clamp(1.8rem, 2.2rem, 2.5rem);
+  font-weight: 700;
+  color: var(--dark-blue);
+  margin: 0 0 1rem 0; /* Space below h2 */
+  line-height: 3rem;
+}
+
+.contact-header p {
+  font-family: "Satoshi", sans-serif;
+  font-size: clamp(1.1rem, 1rem, 1.4rem);
+  color: #444;
+}
+
+.contact-header a {
+  color: var(--dark-blue);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.contact-header a:hover {
+  text-decoration: underline;
+}
+
+/* Right Side: Contact Form */
+.contact-container {
+  flex: 1; /* Equal width */
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure form fields take full width */
+.contact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form Inputs */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--dark-blue);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: "Satoshi", sans-serif;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus Style */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--dark-blue);
+}
+
+/* Submit Button */
+.contact-button {
+  padding: 1rem 2rem;
+  border: 2px solid var(--dark-blue);
+  background: darkblue;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 250px; /* Adjust button width */
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: white;
+  border-color: var(--dark-blue);
+  color: darkblue;
+}
+/*LEGAL*/
+
+.legal {
+  position: relative;
+  background-color: #f8f8f8;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  padding-top: 0rem;
+  padding-bottom: 4rem;
+  width: 100%;
+  z-index: 8;
+}
+
+.legal-content {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 clamp(0.75rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: row; /* Changed to row for PC */
+  align-items: center;
+  justify-content: space-evenly; /* Space between copyright and links */
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.legal-content p {
+  margin: 0;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  color: #666;
+  line-height: 1.5;
+  flex-shrink: 1; /* Allow text to shrink if needed */
+}
+
+.legal-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  flex-wrap: nowrap; /* Prevent wrapping on PC */
+  flex-shrink: 0; /* Prevent links from shrinking */
+}
+
+.legal-links a {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  color: #666;
+  text-decoration: none;
+  padding: 0.5rem;
+  white-space: nowrap; /* Prevent link text from wrapping */
+  transition: color 0.2s ease;
+}
+
+.legal-links a:hover {
+  color: #333;
+}
+
+/* Footer Styles */
+.footer {
+  position: relative;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 128, 1);
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity var(--transition-speed) linear;
+}
+
+.footer.show {
+  visibility: visible;
+  position: fixed;
+  opacity: 1;
+  z-index: 10;
+}
+
+.footer-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.social-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links a {
+  color: var(--white);
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: opacity var(--transition-speed) ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.social-links img {
+  /* Specific styling for your Substack icon */
+  filter: brightness(0) invert(1); /* Makes the SVG white */
+  vertical-align: middle;
+}
+
+.social-links a:hover {
+  opacity: 0.8;
+}
+
+.nav-links {
+  display: none; /* Hide by default */
+}
+
+.cookie-popup {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 400px;
+  z-index: 9999; /* Increased z-index */
+  font-size: 14px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cookie-popup button {
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#accept-cookies {
+  background: var(--dark-blue);
+}
+
+#accept-cookies:hover {
+  background: #002bff;
+}
+
+#decline-cookies {
+  background: #555;
+}
+
+#decline-cookies:hover {
+  background: #777;
+}
+
+#success-message {
+  transition: opacity 1s ease-in-out;
+  opacity: 0; /* Initially hidden */
+}
+
+/* -----------------------------------------------------------------
+   MEDIA QUERIES BY SCREEN SIZE
+-------------------------------------------------------------------*/
+
+/* Small Devices (up to 767px) */
+@media (max-width: 767px) {
+  /* Navbar*/
+  header {
+    position: fixed;
+    height: 5rem; /* Match closer to the ideal setting */
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0rem 1.5rem; /* More balanced padding */
+    background-color: transparent; /* Keep transparent */
+    transition: background var(--transition-speed) ease-in-out,
+      color var(--transition-speed) ease-in-out,
+      padding var(--transition-speed) ease-in-out;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: space-between; /* Keep logo & menu aligned */
+    box-sizing: border-box;
+    z-index: var(--z-header);
+  }
+
+  /* Scrolled Navbar */
+  header.scrolled {
+    height: 5rem; /* Keep consistent look */
+    padding: 0rem 1.5rem; /* More balanced padding */
+    background-color: var(--white);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    z-index: 500;
+  }
+
+  .logo {
+    width: 140px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-start;
+  }
+
+  .logo img,
+  .logo img.scrolled {
+    height: 50px;
+    width: auto;
+    display: block;
+    margin: 0;
+    transition: opacity var(--transition-speed) ease-in-out;
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-height: 90%;
+    padding: clamp(6rem, 12vh, 8rem) clamp(1.5rem, 2.5vw, 2.5rem) 1.25rem; /* Responsive padding */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 8, 46);
+    z-index: 5;
+  }
+
+  .nav-links.active a {
+    display: block;
+    padding: 5px 10px;
+    margin: 5px 0;
+    width: fit-content;
+    text-align: left;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+
+  /* Underline Effect */
+  .nav-links a::after {
+    content: "";
+    position: static;
+    transform: none;
+    left: 0;
+    bottom: 5px;
+    width: 0%;
+    height: 2px;
+    background: var(--white);
+    transition: width var(--transition-speed) ease-in-out;
+  }
+
+  /* Adjust Newsletter Button Inside Mobile Menu */
+  .nav-links.active a.newsletter {
+    min-width: 120px; /* Minimum width for newsletter */
+  }
+
+  .nav-icon {
+    display: none;
+    background-image: url("../images/pre-scroll-final.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+    width: 11rem;
+    height: 3rem;
+    z-index: 7; /* Ensures it sits behind the nav links and hamburger icon */
+  }
+
+  /* Show the icon only when the menu is active */
+  .nav-links.active .nav-icon {
+    display: block;
+  }
+
+  .nav-links.active a.newsletter {
+    background-color: grey; /* Change this to any color you prefer */
+    color: var(--white);
+    border: 2px solid var(--white);
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .hamburger {
+    display: block;
+    color: white;
+    margin: 0 auto; /* Center horizontally */
+    align-self: center; /* Center vertically */
+  }
+
+  /* Hero*/
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    overflow: hidden;
+  }
+
+  .hero-content {
+    max-width: 90%;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Ensures perfect centering */
+    top: 10%; /* Adjust vertical positioning */
+    text-align: left;
+    line-height: 1.3;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .hero-content h1 {
+    width: 100%;
+    max-width: 100%;
+    font-family: "Satoshi", sans-serif;
+    font-size: clamp(1rem, 7vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 3rem;
+    opacity: 0;
+    visibility: hidden; /* Prevents initial flicker */
+    animation: fadeIn 1s ease-in forwards;
+    animation-delay: 1s;
+  }
+
+  .hero-content p {
+    font-size: clamp(1.2rem, 3vw, 1.5rem); /* Ensure readable paragraph text */
+    margin-top: 2rem;
+    margin-bottom: 2rem; /* Reduce spacing */
+    padding: 0rem;
+    padding-right: 0rem;
+  }
+  .subscribe-btn {
+    font-size: 1rem;
+    padding: 0.7rem 0.3rem;
+    width: 50%; /* Makes button span across screen width */
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    display: inline-block;
+  }
+
+  .subscribe-btn:active {
+    background: #000080; /* Darker blue */
+  }
+
+  .substack-cta {
+    font-size: 0.9rem; /* Adjusted size */
+    margin-top: 1rem; /* Adds space between button and text */
+    text-align: left; /* Aligns content to the left */
+  }
+
+  /* Global Font-Size Adjustments */
+  body {
+    overflow-x: hidden;
+  }
+
+  .scroll-indicator {
+    bottom: min(15vh, 120px); /* Moves it slightly higher */
+    font-size: 0.9rem; /* Adjusts size for mobile */
+    letter-spacing: 1px; /* Keeps spacing clean */
+  }
+
+  .scroll-dot {
+    width: 10px; /* Adjusted size */
+    height: 10px;
+  }
+
+  .scroll-line {
+    width: 12px;
+  }
+
+  /* Approach Section */
+  #approach {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    align-items: flex-start;
+    justify-content: flex-start; /* default, can be adjusted */
+    padding: 0rem 1.5rem;
+    background: var(--white);
+    text-align: left;
+    scroll-margin-top: 2.5rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-top: 1.5rem;
+  }
+
+  /*THis contains H2*/
+  .approach-header {
+    background-color: #ffffff;
+    top: 2.5rem;
+    height: fit-content;
+    padding: 0rem;
+    padding-left: 0rem;
+    padding-bottom: 2rem;
+    max-width: 100%; /* Ensure the box doesn't exceed the container width */
+    margin: 0; /* Center the box horizontally */
+    position: relative;
+    z-index: 1;
+  }
+
+  .approach-header h2 {
+    font-family: "Satoshi", sans-serif;
+    position: relative;
+    flex-direction: column;
+    font-size: clamp(1.25rem, calc(1.5rem + 0.52vw), 1.5rem);
+    font-weight: 700;
+    color: #000080;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    align-items: center;
+  }
+
+  .approach-header h2:nth-of-type(2) {
+    color: var(--black);
+    font-weight: 500;
+    font-size: clamp(1.25rem, calc(1.5rem + 0.52vw), 1.5rem);
+  }
+
+  /* Ensure the container fills more of the screen */
+  .approach-boxes {
+    display: grid;
+    position: static;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(15rem, 1fr)
+    ); /* Allows flexible item widths */
+    gap: 1rem; /* Reduce gap between items for better fit */
+    max-width: 100%; /* Increase max-width to take more space */
+    margin: 0 auto;
+    padding: 1rem;
+    position: relative;
+  }
+
+  /* Ensure all boxes have consistent alignment */
+  .approach-item {
+    background: transparent;
+    position: relative;
+    padding: 1rem 0rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+  }
+
+  /* Ensure images fit better */
+  .approach-item img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+  }
+
+  .approach-item img:hover {
+    opacity: 1;
+    transform: scale(1.05); /* Return to full opacity on hover */
+  }
+
+  .approach-item h3 {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    color: var(--dark-blue);
+    font-size: 1.25rem; /* Reduced size to prevent too much space */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; /* Reduced bottom margin */
+    width: 100%;
+    text-align: left; /* Ensures full width */
+  }
+
+  /* Specific rule for paragraph text inside boxes */
+  .approach-item p {
+    font-family: "Satoshi", sans-serif;
+    display: flex;
+    font-weight: 500;
+    margin-top: 0;
+    color: var(--black);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left; /* Explicitly setting text alignment */
+  }
+
+  #news-insights {
+    display: inline;
+    background-color: #f0f0f0; /* Change this to your preferred background color */
+    scroll-margin-top: 50px;
+    padding: 2rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    display: inline;
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .container h2 {
+    font-family: "Satoshi", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 0rem;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .news-grid {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0rem;
+  }
+
+  /* News Card */
+  .news-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Default: Makes sure they stretch within their grid column */
+    max-width: 350px; /* Ensures they don’t get too big */
+    height: auto; /* Allows dynamic height based on content */
+    min-height: 300px; /* Prevents them from becoming too small */
+  }
+
+  #faq {
+    padding: 2rem 1.5rem; /* Reduce padding */
+    scroll-margin-top: 50px;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: #f0f0f0;
+    color: #000080;
+    font-family: "Satoshi", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-align: left;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+  }
+
+  .faq-wrapper {
+    flex-direction: column;
+    align-items: left;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .faq-header {
+    text-align: left;
+    position: relative;
+    top: 0;
+    max-width: 85%; /* Limit width so text doesn't stretch too much */
+    margin: 0 auto;
+    padding-top: 1.5rem; /* Reduce padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem; /* Spacing between H2 and span */
+    flex-wrap: nowrap; /* Prevents text from breaking into two lines */
+  }
+
+  .faq-header h2 {
+    font-size: 2rem;
+    line-height: 1.3;
+    font-weight: bold;
+    white-space: nowrap; /* Prevents automatic text wrapping */
+    text-align: center;
+  }
+
+  .faq-header h2 span {
+    color: #555;
+    white-space: nowrap; /* Ensures it stays in one line */
+  }
+
+  .faq-container {
+    width: 100%;
+    max-width: 900px;
+    gap: 1rem;
+    font-size: 1.2rem;
+    padding-top: 2.5rem;
+  }
+
+  .faq-item {
+    max-width: 90%; /* Ensures responsiveness */
+    width: 100%; /* Slightly reduce width for better fit */
+    margin: 0 auto; /* Ensures centering */
+    align-items: center;
+    align-items: center;
+  }
+
+  .faq-question {
+    font-size: 1.2rem;
+    padding: 1rem 1rem;
+    align-items: center;
+  }
+
+  .faq-icon {
+    width: 1em; /* Slightly smaller */
+    height: 1em;
+  }
+  .faq-icon::before {
+    height: 1em;
+    width: 0.15em;
+  }
+  .faq-icon::after {
+    width: 1em;
+    height: 0.15em;
+  }
+
+  .skyline-divider {
+    height: 80px; /* Adjust for mobile */
+  }
+
+  /* Contact Section */
+  #contact {
+    background: var(--white);
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    scroll-margin-top: 4rem;
+  }
+
+  .contact-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .contact-header,
+  .contact-container {
+    max-width: 95%;
+    text-align: left;
+  }
+
+  .contact-header h2 {
+    max-width: 100%; /* Prevents excessive line breaks */
+    margin: 0 auto; /* Centers text */
+    text-align: left;
+    line-height: 3rem; /* Adjusts vertical spacing */
+  }
+
+  .contact-header p {
+    max-width: 100%; /* Keeps text in a comfortable reading width */
+    gap: 2rem; /* Adds space between elements */
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    margin: 0 auto; /* Centers text */
+    text-align: left;
+    line-height: 1.4; /* More natural line spacing */
+    font-size: 1rem; /* Ensure readability */
+    color: #444; /* Softer color for better contrast */
+  }
+
+  .contact-header p strong {
+    font-weight: 700;
+    word-break: break-word;
+    color: #000080; /* Darker blue for better readability */
+  }
+
+  .contact-button {
+    background-color: var(--dark-blue);
+    border-color: var(--dark-blue);
+    color: var(--white);
+  }
+
+  /* Footer */
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 128, 1);
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity var(--transition-speed) linear;
+  }
+
+  .footer.show {
+    visibility: visible;
+    opacity: 1;
+    z-index: 100000;
+  }
+
+  .footer-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-links a {
+    color: var(--white);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: opacity var(--transition-speed) ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .social-links img {
+    /* Specific styling for your Substack icon */
+    filter: brightness(0) invert(1); /* Makes the SVG white */
+    vertical-align: middle;
+  }
+
+  .social-links a:hover {
+    opacity: 0.8;
+  }
+
+  /* Cookies*/
+
+  .cookie-popup {
+    width: 90%;
+    bottom: 10px;
+    left: 10px; /* Adjusted for smaller screens */
+    padding: 10px 15px;
+    font-size: 12px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cookie-popup button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Legal Section */
+
+  .legal {
+    position: relative;
+    background-color: #f8f8f8;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    padding-top: 0rem;
+    padding-bottom: clamp(4.5rem, 9vw, 6.5rem);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    z-index: 1;
+    margin-bottom: 5px;
+  }
+
+  .legal-content {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 clamp(0.75rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column; /* Changed to row for PC */
+    align-items: center;
+    justify-content: space-evenly; /* Space between copyright and links */
+    gap: 0rem;
+    box-sizing: border-box;
+  }
+
+  .legal-content p {
+    margin: 0;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    color: #666;
+    line-height: 1.5;
+    flex-shrink: 1; /* Allow text to shrink if needed */
+  }
+
+  .legal-links {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: clamp(
+      0.25rem,
+      0.5vw,
+      0.25rem
+    ); /* Reduced gap to narrow the space between links */
+    flex-wrap: nowrap; /* Prevent wrapping on PC */
+    flex-shrink: 0; /* Prevent links from shrinking */
+  }
+
+  .legal-links a {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    color: #666;
+    text-decoration: none;
+    padding: 0.2rem;
+    white-space: nowrap; /* Prevent link text from wrapping */
+    transition: color 0.2s ease;
+  }
+
+  .legal-links a:hover {
+    color: #333;
+  }
+}
+
+/* Medium Devices (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Navbar */
+  header {
+    position: fixed;
+    height: 6rem; /* Slightly larger for tablets */
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0rem 3rem; /* More padding for larger screens */
+    background-color: transparent; /* Keep transparent */
+    transition: background var(--transition-speed) ease-in-out,
+      color var(--transition-speed) ease-in-out,
+      padding var(--transition-speed) ease-in-out;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: space-between; /* Keep logo & menu aligned */
+    box-sizing: border-box;
+    z-index: var(--z-header);
+  }
+
+  /* Scrolled Navbar */
+  header.scrolled {
+    height: 6rem; /* Consistent height when scrolled */
+    padding: 0rem 3rem; /* Keep balanced padding */
+    background-color: var(--white);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    z-index: 500;
+  }
+
+  .logo {
+    width: 180px; /* Larger logo for tablets */
+    height: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-start;
+  }
+
+  .logo img,
+  .logo img.scrolled {
+    height: 60px; /* Increased size for tablet screens */
+    width: auto;
+    display: block;
+    margin: 0;
+    transition: opacity var(--transition-speed) ease-in-out;
+  }
+
+  /* NAV-LINKS AND ACTIVE (If applicable) */
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-height: 90%;
+    padding: 120px 40px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 8, 46);
+    z-index: 5;
+  }
+
+  .nav-links.active a {
+    display: block;
+    padding: 15px 25px;
+    margin: 3px 0;
+    width: fit-content;
+    text-align: left;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  /* Underline Effect */
+  .nav-links a::after {
+    content: "";
+    position: static;
+    transform: none;
+    left: 0;
+    bottom: 5px;
+    width: 0%;
+    height: 2px;
+    background: var(--white);
+    transition: width var(--transition-speed) ease-in-out;
+  }
+
+  /* Adjust Newsletter Button Inside Mobile Menu */
+  .nav-links.active a.newsletter {
+    min-width: 120px; /* Minimum width for newsletter */
+  }
+
+  .nav-icon {
+    display: none;
+    background-image: url("../images/pre-scroll-final.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1.5rem;
+    left: 3.5rem;
+    width: 11rem;
+    height: 3rem;
+    z-index: 150; /* Ensures it sits behind the nav links and hamburger icon */
+  }
+
+  /* Show the icon only when the menu is active */
+  .nav-links.active .nav-icon {
+    display: block;
+  }
+
+  /* Hamburger Menu*/
+  .hamburger {
+    display: block;
+    color: white;
+    margin: 0 auto; /* Center horizontally */
+    align-self: center; /* Center vertically */
+  }
+
+  /* Adjust Newsletter Button Inside Mobile Menu */
+  .nav-links.active a.newsletter {
+    background-color: grey; /* Change this to any color you prefer */
+    color: var(--white);
+    border: 2px solid var(--white);
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  /* Hero Section*/
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    overflow: hidden;
+  }
+
+  .hero-content {
+    max-width: 80%;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Ensures perfect centering */
+    top: 15%; /* Adjusted position */
+    text-align: left;
+    line-height: 1.3;
+    padding: 0 30px; /* More padding */
+  }
+
+  .hero-content h1 {
+    max-width: 100%;
+    font-family: "Satoshi", sans-serif;
+    font-size: clamp(2rem, 8vw, rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 3rem;
+    opacity: 0;
+    visibility: hidden; /* Prevents initial flicker */
+    animation: fadeIn 1s ease-in forwards;
+    animation-delay: 1s;
+  }
+
+  .hero-content p {
+    font-size: 1.5rem; /* Adjusted font-size */
+    text-align: left;
+  }
+
+  .subscribe-btn {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
+    width: 40%;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    display: inline-block;
+  }
+
+  .substack-cta {
+    font-size: 0.9rem; /* Adjusted size */
+    margin-top: 1rem; /* Adds space between button and text */
+    text-align: left; /* Aligns content to the left */
+  }
+
+  /* Global Font-Size Adjustments */
+  body {
+    overflow-x: hidden;
+  }
+
+  .scroll-indicator {
+    bottom: min(15vh, 120px); /* Moves it slightly higher */
+    font-size: 0.9rem; /* Adjusts size for mobile */
+    letter-spacing: 1px; /* Keeps spacing clean */
+  }
+
+  .scroll-dot {
+    width: 10px; /* Adjusted size */
+    height: 10px;
+  }
+
+  .scroll-line {
+    width: 12px;
+  }
+  /* Approach Section */
+  #approach {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    align-items: center;
+    justify-content: flex-start; /* default, can be adjusted */
+    padding: 1rem 3rem;
+    background: var(--white);
+    text-align: left;
+    scroll-margin-top: 6rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /*THis contains H2*/
+  .approach-header {
+    background-color: #ffffff;
+    top: 2.5rem;
+    height: fit-content;
+    padding: 0rem;
+    padding-left: 1rem;
+    padding-bottom: 2rem;
+    max-width: 100%; /* Ensure the box doesn't exceed the container width */
+    margin: 0; /* Center the box horizontally */
+    position: relative;
+    z-index: 1;
+  }
+
+  .approach-header h2 {
+    font-family: "Satoshi", sans-serif;
+    position: relative;
+    flex-direction: column;
+    font-size: clamp(1rem, calc(1rem + 0.52vw), 1.25rem);
+    font-weight: 700;
+    color: #000080;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    text-align: left;
+    align-items: center;
+  }
+
+  .approach-header h2:nth-of-type(2) {
+    color: var(--black);
+    font-weight: 500;
+    font-size: clamp(1rem, calc(1rem + 0.52vw), 1.25rem);
+  }
+
+  .approach-header h2 .word {
+    display: inline-block;
+    opacity: 0;
+  }
+
+  .approach-header h2 .word.animate {
+    animation: wordSlide 0.5s forwards;
+  }
+
+  @keyframes wordSlide {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Ensure the container fills more of the screen */
+  .approach-boxes {
+    display: grid;
+    position: static;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(15rem, 1fr)
+    ); /* Allows flexible item widths */
+    gap: 1rem; /* Reduce gap between items for better fit */
+    max-width: 100%; /* Increase max-width to take more space */
+    margin: 0 auto;
+    padding: 1rem;
+    position: relative;
+  }
+
+  /* Ensure all boxes have consistent alignment */
+  .approach-item {
+    background: transparent;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+  }
+
+  /* Ensure images fit better */
+  .approach-item img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+  }
+
+  .approach-item img:hover {
+    opacity: 1;
+    transform: scale(1.05); /* Return to full opacity on hover */
+  }
+
+  .approach-item h3 {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    color: var(--dark-blue);
+    font-size: 1.5rem; /* Reduced size to prevent too much space */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; /* Reduced bottom margin */
+    width: 100%;
+    text-align: left; /* Ensures full width */
+  }
+
+  /* Specific rule for paragraph text inside boxes */
+  .approach-item p {
+    font-family: "Satoshi", sans-serif;
+    display: flex;
+    font-weight: 500;
+    margin-top: 0;
+    color: var(--black);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    text-align: left; /* Explicitly setting text alignment */
+  }
+  #news-insights {
+    display: inline;
+    background-color: #f0f0f0; /* Change this to your preferred background color */
+    scroll-margin-top: 50px;
+    padding: 2rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    display: inline;
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .container h2 {
+    font-family: "Satoshi", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 0rem;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .news-grid {
+    display: flex;
+    display: grid;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 0rem 0rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center; /* Centers all items */
+    flex-wrap: nowrap; /* Prevents wrapping */
+  }
+
+  /* News Card */
+  .news-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .news-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  /* Image Section */
+  .news-image {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+    filter: contrast(110%);
+  }
+
+  /* Content Section */
+  .news-content {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    min-height: 140px; /* Ensures equal height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .news-date {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  .news-category {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  /* Custom Background for Article 2 */
+  .custom-bg .news-content {
+    background-color: #000080; /* Change this color as needed */
+  }
+
+  #faq {
+    padding: 2rem 1.5rem; /* Reduce padding */
+    scroll-margin-top: 50px;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: #f0f0f0;
+    color: #000080;
+    font-family: "Satoshi", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-align: left;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+  }
+
+  .faq-wrapper {
+    flex-direction: column;
+    align-items: left;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .faq-header {
+    text-align: left;
+    position: relative;
+    top: 0;
+    max-width: 85%; /* Limit width so text doesn't stretch too much */
+    margin: 0 auto;
+    padding-top: 1.5rem; /* Reduce padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem; /* Spacing between H2 and span */
+    flex-wrap: nowrap; /* Prevents text from breaking into two lines */
+  }
+
+  .faq-header h2 {
+    font-size: 2rem;
+    line-height: 1.3;
+    font-weight: bold;
+    white-space: nowrap; /* Prevents automatic text wrapping */
+    text-align: center;
+  }
+
+  .faq-header h2 span {
+    color: #555;
+    white-space: nowrap; /* Ensures it stays in one line */
+  }
+
+  .faq-container {
+    width: 100%;
+    max-width: 900px;
+    gap: 1.5rem;
+    display: flex;
+    font-size: 1.2rem;
+    flex-direction: column;
+  }
+
+  .faq-item {
+    max-width: 90%; /* Ensures responsiveness */
+    width: 100%; /* Slightly reduce width for better fit */
+    margin: 0 auto; /* Ensures centering */
+    align-items: center;
+  }
+
+  .faq-question {
+    font-size: 1.2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    align-items: center;
+  }
+
+  .faq-icon {
+    width: 1em; /* Slightly smaller */
+    height: 1em;
+  }
+  .faq-icon::before {
+    height: 1em;
+    width: 0.15em;
+  }
+  .faq-icon::after {
+    width: 1em;
+    height: 0.15em;
+  }
+
+  /* Skyline Divider */
+  .skyline-divider {
+    height: 100px;
+  }
+
+  /* Contact Section Fix */
+  #contact {
+    background: var(--white);
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Contact Section*/
+  .contact-wrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-header,
+  .contact-container {
+    max-width: 90%;
+    text-align: left;
+  }
+
+  .contact-header h2 {
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 2.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .contact-header p {
+    max-width: 100%;
+    gap: 4rem;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 1.5;
+    font-size: 1.1rem;
+    color: #444;
+  }
+
+  .contact-header p strong {
+    font-weight: 700;
+    word-break: break-word;
+    color: #000080;
+  }
+
+  /* Submit Button */
+  .contact-button {
+    padding: 1rem 2rem;
+    border: 2px solid var(--dark-blue);
+    background: darkblue;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Ensure form fields take full width */
+  .contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 128, 1);
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity var(--transition-speed) linear;
+  }
+
+  .footer.show {
+    visibility: visible;
+    opacity: 1;
+    z-index: 100000;
+  }
+
+  .footer-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .social-links a {
+    color: var(--white);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: opacity var(--transition-speed) ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .social-links img {
+    /* Specific styling for your Substack icon */
+    filter: brightness(0) invert(1); /* Makes the SVG white */
+    vertical-align: middle;
+  }
+
+  .cookie-popup {
+    width: 70%;
+    bottom: 20px;
+    left: 20px; /* Ensure it appears on the left side */
+    padding: 15px;
+    font-size: 14px;
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .cookie-popup button {
+    width: auto;
+    margin: 0 5px;
+  }
+
+  /*LEGAL*/
+
+  /*LEGAL*/
+
+  .legal {
+    position: relative;
+    background-color: #f8f8f8;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    padding-top: 0rem;
+    padding-bottom: clamp(3.5rem, 8vw, 6rem);
+    max-width: 100%;
+    z-index: 1;
+  }
+
+  .legal-content {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 clamp(0.75rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column; /* Changed to row for PC */
+    align-items: center;
+    justify-content: space-evenly; /* Space between copyright and links */
+    gap: 0rem;
+    box-sizing: border-box;
+  }
+
+  .legal-content p {
+    margin: 0;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    color: #666;
+    line-height: 1.5;
+    flex-shrink: 1; /* Allow text to shrink if needed */
+  }
+
+  .legal-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    flex-wrap: nowrap; /* Prevent wrapping on PC */
+    flex-shrink: 0; /* Prevent links from shrinking */
+  }
+
+  .legal-links a {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    color: #666;
+    text-decoration: none;
+    padding: 0.5rem;
+    white-space: nowrap; /* Prevent link text from wrapping */
+    transition: color 0.2s ease;
+  }
+
+  .legal-links a:hover {
+    color: #333;
+  }
+}
+
+/* Large Devices (1024px and above) */
+@media (min-width: 1024px) {
+  /* Approach Boxes for large screens */
+  .approach-boxes {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(2, 1fr)
+    ); /* Adjusts dynamically */
+    gap: 2rem; /* Keeps spacing even */
+    max-width: 95vw; /* Uses more of the screen width */
+    margin: 0 auto;
+  }
+  .nav-links {
+    display: flex !important; /* Ensure normal nav-links are shown */
+    flex-direction: row;
+    position: relative;
+    background: transparent;
+    height: auto;
+    align-items: center;
+  }
+
+  .nav-links.active {
+    display: none !important; /* Ensure the mobile menu disappears */
+  }
+
+  .hamburger {
+    display: none !important; /* Hide hamburger on larger screens */
+  }
+
+  .approach-header h2 .word {
+    display: inline-block;
+    opacity: 0;
+  }
+
+  .approach-header h2 .word.animate {
+    animation: wordSlide 0.5s forwards;
+  }
+
+  @keyframes wordSlide {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 128, 1);
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    z-index: var(--z-header);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity var(--transition-speed) linear;
+  }
+
+  .footer.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .footer-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-links a {
+    color: var(--white);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: opacity var(--transition-speed) ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .social-links img {
+    /* Specific styling for your Substack icon */
+    filter: brightness(0) invert(1); /* Makes the SVG white */
+    vertical-align: middle;
+  }
+
+  .social-links a:hover {
+    opacity: 0.8;
+  }
+}
+
+/* ------------------------------------------
+   EXTRA SMALL SCREENS (under 375px)
+   ------------------------------------------*/
+@media (max-width: 375px) {
+  .logo {
+    width: 120px;
+  }
+
+  .logo img {
+    height: 35px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    line-height: 1.3;
+  }
+  .hero-content p {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+
+  /* EDIT: Lighten top/bottom padding on #approach & #contact */
+  #approach,
+  #contact {
+    padding: 2.5rem 1rem;
+  }
+
+  /* EDIT: Make sure subscribe button never overflows horizontally */
+  .subscribe-btn {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .nav-links.active {
+    /* Make padding smaller on tiny screens */
+    padding: 80px 20px 20px;
+  }
+
+  .cookie-popup {
+    width: 90%;
+    bottom: 10px;
+    left: 50%;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .cookie-popup button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
