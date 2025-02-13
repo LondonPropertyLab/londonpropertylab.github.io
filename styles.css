@@ -1810,13 +1810,16 @@ header.scrolled .hamburger.active span {
   /* Cookies*/
 
   .cookie-popup {
-    width: 90%;
-    bottom: 10px;
+    position: fixed;
+    width: 85%;
+    bottom: 70px;
     left: 10px; /* Adjusted for smaller screens */
-    padding: 10px 15px;
+    right: 10px;
+    padding: 10px, 1.5rem;
     font-size: 12px;
     flex-direction: column;
     text-align: center;
+    z-index: 99999;
   }
 
   .cookie-popup button {
