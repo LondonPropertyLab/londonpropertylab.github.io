@@ -690,7 +690,7 @@ header.scrolled .hamburger.active span {
 
 /* News Card */
 .news-card {
-  background-color: white;
+  background-color: #f0f0f0;
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
