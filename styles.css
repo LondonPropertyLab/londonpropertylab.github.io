@@ -721,7 +721,7 @@ header.scrolled .hamburger.active span {
   padding: 20px;
   background-color: #333;
   color: white;
-  min-height: 140px; /* Ensures equal height */
+  min-height: 190px; /* Ensures equal height */
   display: flex;
   flex-direction: column;
   justify-content: center;
